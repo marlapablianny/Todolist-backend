@@ -6,6 +6,7 @@ const TarefasController = require('../controllers/TarefasController.js')
 
 router.get('/', TarefasController.index);
 router.post('/', TarefasController.create);
+router.delete('/:id', TarefasController.delete)
 
 
 

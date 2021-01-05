@@ -1,8 +1,6 @@
 const express = require('express');
-const { isNamedExportBindings } = require('typescript');
 var knex = require( '../database');
 var router = express.Router();
-
 
 
 module.exports = {
@@ -22,6 +20,19 @@ module.exports = {
             return res.status(201).send()
         } catch (error) {
             next (error)
+        }
+    },
+    async delete(req, res,) {
+        try {
+            const { id } = req.params
+
+            await knex('tarefas')
+            .where({ id })
+            .del()
+
+            return res.send()
+        } catch (error) {
+            next(error)
         }
     },
 }

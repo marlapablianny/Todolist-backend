@@ -2,9 +2,14 @@ const express = require('express');
 var knex = require( '../database');
 var router = express.Router();
 
+const TarefasController = require('../controllers/TarefasController.js')
+
+router.get('/', TarefasController.index);
+router.post('/', TarefasController.create);
 
 
-router.get('/', function (req, res, ){
+
+/*router.get('/', function (req, res, ){
     return knex.select('id','descricao','concluida').from('tarefas').then(
         function(resultado){
             res.send(resultado)
@@ -12,6 +17,6 @@ router.get('/', function (req, res, ){
         }
     )
     
-})
+})*/
 module.exports = router;
 

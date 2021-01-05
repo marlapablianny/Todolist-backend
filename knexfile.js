@@ -13,5 +13,8 @@ module.exports = {
       database: 'tarefas',
     }
   },
+  seeds: {
+    directory: '/seeds',
+  }
 
 };

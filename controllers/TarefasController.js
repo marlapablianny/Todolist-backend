@@ -5,16 +5,17 @@ var router = express.Router();
 
 module.exports = {
     async index(req, res, ){
-        const resultado = await knex.select('id','descricao','concluida').from('tarefas');          
+        const resultado = await knex.select('id','descricao', 'concluida').from('tarefas');          
         
         return res.send(resultado)
     },
     async create(req, res){
         try {
-            const {descricao} = req.body
+            const {descricao, concluida} = req.body
             
             await knex('tarefas').insert({
-                descricao
+                descricao,
+                concluida: false,
             })
 
             return res.status(201).send()
@@ -35,4 +36,21 @@ module.exports = {
             next(error)
         }
     },
+    async update(req, res,next){
+        try {
+            const { id } = req.params
+
+            const tarefa = await knex('tarefas').where('id', id).first()
+
+            await knex('tarefas')
+            .where('id', id)
+            .update({ concluida: !tarefa.concluida })
+
+            return res.send()
+        } catch (error) {
+            next(error)
+        }
+    },
+
+
 }
